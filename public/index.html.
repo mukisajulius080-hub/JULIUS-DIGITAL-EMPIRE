@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JULIUS DIGITAL EMPIRE</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#0b1020;color:#fff;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:22px 6%;display:flex;
+ justify-content:space-between;align-items:center;
+ border-bottom:1px solid #293149;
+}
+.logo{font-size:20px;font-weight:bold;color:#d8b66b}
+nav a{color:white;text-decoration:none;margin-left:14px;font-size:13px}
+.hero{text-align:center;padding:75px 18px 55px}
+.hero h1{font-size:40px;margin:10px}
+.hero p{color:#b9c1d4;line-height:1.7}
+.gold{color:#e8c879}
+.btn{
+ display:inline-block;padding:13px 22px;
+ border-radius:9px;background:#7750c9;
+ color:white;text-decoration:none;margin:8px;
+}
+.container{padding:35px 6%}
+h2{text-align:center}
+.cards{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;margin-top:25px
+}
+.card{
+ background:#171f34;border:1px solid #303b55;
+ border-radius:15px;padding:24px;
+}
+.card h3{color:#e8c879}
+.card p{color:#b9c1d4;line-height:1.6}
+.card a{color:#d9c3ff}
+.tag{color:#9e83ed;font-size:12px}
+footer{
+ padding:30px;text-align:center;
+ color:#8994ab;border-top:1px solid #293149;
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">JULIUS DIGITAL EMPIRE</div>
+ <nav>
+  <a href="#business">Business</a>
+  <a href="#ai">AI Tools</a>
+  <a href="#contact">Contact</a>
+ </nav>
+</header>
+
+<section class="hero">
+ <div class="tag">WELCOME TO THE DIGITAL FUTURE</div>
+ <h1>Build. Create. <span class="gold">Earn.</span></h1>
+ <p>
+  Your digital destination for online business,
+  affiliate opportunities and intelligent AI tools.
+ </p>
+ <a class="btn" href="#business">Explore Our Services</a>
+</section>
+
+<section class="container" id="business">
+ <h2>Our Business Departments</h2>
+ <div class="cards">
+
+  <div class="card">
+   <div class="tag">01 / DIGITAL APPLICATIONS</div>
+   <h3>Paid Applications</h3>
+   <p>
+    Discover useful digital applications,
+    premium services and online solutions.
+   </p>
+   <a href="#contact">Explore services →</a>
+  </div>
+
+  <div class="card">
+   <div class="tag">02 / AFFILIATE HUB</div>
+   <h3>Affiliate Marketplace</h3>
+   <p>
+    Discover products, explore offers
+    and shop through our affiliate partners.
+   </p>
+   <a href="#contact">Explore products →</a>
+  </div>
+
+  <div class="card">
+   <div class="tag">03 / ARTIFICIAL INTELLIGENCE</div>
+   <h3>AI Business Tools</h3>
+   <p>
+    Use intelligent tools to write,
+    create, plan and grow your business.
+   </p>
+   <a href="#ai">Explore AI tools →</a>
+  </div>
+
+ </div>
+</section>
+
+<section class="container" id="ai">
+ <h2>Our AI Tools</h2>
+ <div class="cards">
+
+  <div class="card">
+   <h3>AI Business Assistant</h3>
+   <p>Generate business ideas and business plans.</p>
+   <span class="tag">COMING SOON</span>
+  </div>
+
+  <div class="card">
+   <h3>AI CV Writer</h3>
+   <p>Prepare professional CVs and applications.</p>
+   <span class="tag">COMING SOON</span>
+  </div>
+
+  <div class="card">
+   <h3>AI Advertising Writer</h3>
+   <p>Create promotional messages and adverts.</p>
+   <span class="tag">COMING SOON</span>
+  </div>
+
+  <div class="card">
+   <h3>AI Social Media Assistant</h3>
+   <p>Generate captions and social media ideas.</p>
+   <span class="tag">COMING SOON</span>
+  </div>
+
+  <div class="card">
+   <h3>AI Proposal Writer</h3>
+   <p>Prepare professional project proposals.</p>
+   <span class="tag">COMING SOON</span>
+  </div>
+
+  <div class="card">
+   <h3>AI Music Assistant</h3>
+   <p>Develop song ideas and music learning resources.</p>
+   <span class="tag">COMING SOON</span>
+  </div>
+
+ </div>
+</section>
+
+<section class="container" id="contact">
+ <div class="card" style="text-align:center">
+  <h2>Grow With Us</h2>
+  <p>JULIUS DIGITAL EMPIRE — Your partner in the digital world.</p>
+  <p>Uganda | MTN Mobile Money | Airtel Money</p>
+  <p>Contact details and customer registration coming soon.</p>
+ </div>
+</section>
+
+<footer>
+ © 2026 JULIUS DIGITAL EMPIRE. All rights reserved.
+</footer>
+
+</body>
+</html>
