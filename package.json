@@ -1,1 +1,15 @@
 
+{
+  "name": "julius-digital-empire",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Julius Digital Empire - Digital Business and AI Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
+
