@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JULIUS DIGITAL EMPIRE</title>
+
 <style>
 *{box-sizing:border-box}
 body{
@@ -14,6 +15,7 @@ body{
 header{
  padding:22px 6%;display:flex;
  justify-content:space-between;align-items:center;
+ flex-wrap:wrap;gap:12px;
  border-bottom:1px solid #293149;
 }
 .logo{font-size:20px;font-weight:bold;color:#d8b66b}
@@ -26,6 +28,7 @@ nav a{color:white;text-decoration:none;margin-left:14px;font-size:13px}
  display:inline-block;padding:13px 22px;
  border-radius:9px;background:#7750c9;
  color:white;text-decoration:none;margin:8px;
+ border:0;cursor:pointer;
 }
 .container{padding:35px 6%}
 h2{text-align:center}
@@ -41,18 +44,33 @@ h2{text-align:center}
 .card p{color:#b9c1d4;line-height:1.6}
 .card a{color:#d9c3ff}
 .tag{color:#9e83ed;font-size:12px}
+label{display:block;margin:18px 0 8px}
+select,textarea,input{
+ width:100%;padding:13px;border-radius:8px;
+ border:1px solid #45516d;background:#0b1020;
+ color:white;font-size:15px;
+}
+textarea{resize:vertical}
+button:disabled{opacity:.5;cursor:wait}
+#aiResult{
+ white-space:pre-wrap;line-height:1.7;
+ color:#e2e8f5;margin-top:20px;
+ overflow-wrap:anywhere;
+}
+#aiLoading{color:#e8c879;margin-top:15px}
 footer{
  padding:30px;text-align:center;
  color:#8994ab;border-top:1px solid #293149;
 }
 </style>
 </head>
+
 <body>
 
 <header>
  <div class="logo">JULIUS DIGITAL EMPIRE</div>
  <nav>
-  <a href="#business">Business</a>
+  <a href="#business">Departments</a>
   <a href="#ai">AI Tools</a>
   <a href="#contact">Contact</a>
  </nav>
@@ -62,8 +80,8 @@ footer{
  <div class="tag">WELCOME TO THE DIGITAL FUTURE</div>
  <h1>Build. Create. <span class="gold">Earn.</span></h1>
  <p>
-  Your digital destination for online business,
-  affiliate opportunities and intelligent AI tools.
+ Your digital destination for online business,
+ affiliate opportunities and intelligent AI tools.
  </p>
  <a class="btn" href="#business">Explore Our Services</a>
 </section>
@@ -75,30 +93,21 @@ footer{
   <div class="card">
    <div class="tag">01 / DIGITAL APPLICATIONS</div>
    <h3>Paid Applications</h3>
-   <p>
-    Discover useful digital applications,
-    premium services and online solutions.
-   </p>
+   <p>Discover useful digital applications, premium services and online solutions.</p>
    <a href="#contact">Explore services →</a>
   </div>
 
   <div class="card">
    <div class="tag">02 / AFFILIATE HUB</div>
    <h3>Affiliate Marketplace</h3>
-   <p>
-    Discover products, explore offers
-    and shop through our affiliate partners.
-   </p>
+   <p>Discover products, explore offers and shop through our affiliate partners.</p>
    <a href="#contact">Explore products →</a>
   </div>
 
   <div class="card">
    <div class="tag">03 / ARTIFICIAL INTELLIGENCE</div>
    <h3>AI Business Tools</h3>
-   <p>
-    Use intelligent tools to write,
-    create, plan and grow your business.
-   </p>
+   <p>Use intelligent tools to write, create, plan and grow your business.</p>
    <a href="#ai">Explore AI tools →</a>
   </div>
 
@@ -107,76 +116,86 @@ footer{
 
 <section class="container" id="ai">
  <h2>Our AI Tools</h2>
+ <p style="text-align:center;color:#b9c1d4">
+ Choose an assistant and let AI help you get things done.
+ </p>
+
  <div class="cards">
 
-  
-<div class="card">
-  <h3>JULIUS DIGITAL EMPIRE</h3>
-  <h4>AI BUSINESS ASSISTANT</h4>
+  <div class="card">
+   <h3>AI Business Assistant</h3>
+   <p>Generate business ideas, plans, budgets, marketing strategies and growth advice.</p>
+   <button class="btn" onclick="selectTool('idea')">Use Business Assistant</button>
+  </div>
 
-  <p>
-    Your intelligent business partner.
-    Get practical business solutions for Uganda and beyond.
-  </p>
+  <div class="card">
+   <h3>AI CV Writer</h3>
+   <p>Prepare professional CVs, resumes and job applications.</p>
+   <button class="btn" onclick="selectTool('cv')">Create My CV</button>
+  </div>
 
-  <label for="businessTool">Choose an AI tool</label>
-  <select id="businessTool">
+  <div class="card">
+   <h3>AI Advertising Writer</h3>
+   <p>Create promotional messages and adverts for your products and services.</p>
+   <button class="btn" onclick="selectTool('advertising')">Create Advertisement</button>
+  </div>
+
+  <div class="card">
+   <h3>AI Social Media Assistant</h3>
+   <p>Generate captions, content calendars and social media ideas.</p>
+   <button class="btn" onclick="selectTool('social')">Create Social Content</button>
+  </div>
+
+  <div class="card">
+   <h3>AI Proposal Writer</h3>
+   <p>Prepare professional project proposals, objectives and budgets.</p>
+   <button class="btn" onclick="selectTool('proposal')">Write Proposal</button>
+  </div>
+
+  <div class="card">
+   <h3>AI Music Assistant</h3>
+   <p>Develop original song ideas, lyrics and music learning resources.</p>
+   <button class="btn" onclick="selectTool('music')">Explore Music Assistant</button>
+  </div>
+
+ </div>
+
+ <div class="card" style="margin-top:30px">
+  <h3>JULIUS DIGITAL EMPIRE AI WORKSPACE</h3>
+  <p>Select your preferred AI assistant and describe what you need.</p>
+
+  <label for="aiTool">Choose an AI tool</label>
+  <select id="aiTool">
+   <optgroup label="Business Assistant">
     <option value="idea">Business Idea Generator</option>
     <option value="plan">Business Plan Creator</option>
     <option value="marketing">Marketing Strategy Generator</option>
     <option value="budget">Startup Budget Planner</option>
     <option value="growth">Business Growth Advisor</option>
+   </optgroup>
+   <optgroup label="Other AI Tools">
+    <option value="cv">AI CV Writer</option>
+    <option value="advertising">AI Advertising Writer</option>
+    <option value="social">AI Social Media Assistant</option>
+    <option value="proposal">AI Proposal Writer</option>
+    <option value="music">AI Music Assistant</option>
+   </optgroup>
   </select>
 
-  <label for="businessDetails">Tell us about your business</label>
+  <label for="aiDetails">Describe what you want the AI to do</label>
   <textarea
-    id="businessDetails"
-    rows="6"
-    placeholder="Describe your interests, skills, location, starting capital in UGX and business goals..."
+   id="aiDetails"
+   rows="7"
+   maxlength="6000"
+   placeholder="Enter your information or instructions here..."
   ></textarea>
 
-  <button id="generateBusiness" type="button">
-    Generate Business Solution
+  <button class="btn" id="generateAI" type="button">
+   Generate My Solution
   </button>
 
-  <div id="businessLoading" hidden>
-    Generating your business solution...
-  </div>
-
-  <div id="businessResult" aria-live="polite"></div>
-</div>
-
-
-  <div class="card">
-   <h3>AI CV Writer</h3>
-   <p>Prepare professional CVs and applications.</p>
-   <span class="tag">COMING SOON</span>
-  </div>
-
-  <div class="card">
-   <h3>AI Advertising Writer</h3>
-   <p>Create promotional messages and adverts.</p>
-   <span class="tag">COMING SOON</span>
-  </div>
-
-  <div class="card">
-   <h3>AI Social Media Assistant</h3>
-   <p>Generate captions and social media ideas.</p>
-   <span class="tag">COMING SOON</span>
-  </div>
-
-  <div class="card">
-   <h3>AI Proposal Writer</h3>
-   <p>Prepare professional project proposals.</p>
-   <span class="tag">COMING SOON</span>
-  </div>
-
-  <div class="card">
-   <h3>AI Music Assistant</h3>
-   <p>Develop song ideas and music learning resources.</p>
-   <span class="tag">COMING SOON</span>
-  </div>
-
+  <div id="aiLoading" hidden>Generating your solution. Please wait...</div>
+  <div id="aiResult" aria-live="polite"></div>
  </div>
 </section>
 
@@ -194,50 +213,56 @@ footer{
 </footer>
 
 <script>
-document.getElementById("generateBusiness").addEventListener("click", async function () {
-  const tool = document.getElementById("businessTool").value;
-  const details = document.getElementById("businessDetails").value.trim();
-  const result = document.getElementById("businessResult");
-  const loading = document.getElementById("businessLoading");
-  const button = document.getElementById("generateBusiness");
+function selectTool(tool){
+ document.getElementById("aiTool").value = tool;
+ document.getElementById("ai").scrollIntoView({behavior:"smooth"});
+ document.getElementById("aiDetails").focus();
+}
 
-  if (!details) {
-    result.textContent = "Please describe your business, skills, location and starting capital.";
-    return;
+document.getElementById("generateAI").addEventListener("click", async function(){
+
+ const tool = document.getElementById("aiTool").value;
+ const details = document.getElementById("aiDetails").value.trim();
+ const result = document.getElementById("aiResult");
+ const loading = document.getElementById("aiLoading");
+ const button = document.getElementById("generateAI");
+
+ if(!details){
+  result.textContent = "Please describe what you need first.";
+  return;
+ }
+
+ loading.hidden = false;
+ result.textContent = "";
+ button.disabled = true;
+
+ try{
+  const response = await fetch("/api/business-assistant",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+    tool:tool,
+    details:details
+   })
+  });
+
+  const data = await response.json();
+
+  if(!response.ok){
+   throw new Error(data.error || "AI request failed.");
   }
 
-  loading.hidden = false;
-  result.textContent = "";
-  button.disabled = true;
+  result.textContent = data.reply || "No answer was returned.";
 
-  try {
-    const response = await fetch("/api/business-assistant", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        tool: tool,
-        details: details
-      })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "AI request failed.");
-    }
-
-    result.textContent = data.reply || "No answer was returned.";
-
-  } catch (error) {
-    result.textContent = "Sorry, something went wrong: " + error.message;
-  } finally {
-    loading.hidden = true;
-    button.disabled = false;
-  }
+ }catch(error){
+  result.textContent = "Sorry, something went wrong: " + error.message;
+ }finally{
+  loading.hidden = true;
+  button.disabled = false;
+ }
 });
 </script>
 
 </body>
 </html>
+
