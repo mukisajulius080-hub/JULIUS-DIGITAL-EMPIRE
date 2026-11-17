@@ -134,6 +134,7 @@ Respond professionally and helpfully.
 
     if (!response.ok) {
       console.error("Gemini API error:", response.status);
+console.error("Gemini API details:", JSON.stringify(data));
 
       return res.status(
         response.status === 429 ? 429 : 502
