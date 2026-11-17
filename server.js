@@ -52,12 +52,18 @@ console.log("Gemini key loaded:", Boolean(apiKey));
     const tool = req.body.tool;
 
     const tools = {
-      idea: "Generate practical business ideas.",
-      plan: "Create a professional business plan.",
-      marketing: "Create a marketing and advertising strategy.",
-      budget: "Prepare a detailed startup budget and profit estimate.",
-      growth: "Give practical business growth advice."
-    };
+  idea: "Generate practical business ideas.",
+  plan: "Create a professional business plan.",
+  marketing: "Create a marketing and advertising strategy.",
+  budget: "Prepare a detailed startup budget and profit estimate.",
+  growth: "Give practical business growth advice.",
+
+  cv: "Create professional CVs, resumes and job applications.",
+  advertising: "Write persuasive advertisements and promotional messages.",
+  social: "Generate social media captions, content calendars and post ideas.",
+  proposal: "Write professional project proposals with objectives, budgets and implementation plans.",
+  music: "Help develop original song ideas, lyrics, songwriting exercises and music learning resources."
+};
 
     if (!tools[tool]) {
       return res.status(400).json({
