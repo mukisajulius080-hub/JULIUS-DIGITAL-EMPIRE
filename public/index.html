@@ -109,11 +109,43 @@ footer{
  <h2>Our AI Tools</h2>
  <div class="cards">
 
-  <div class="card">
-   <h3>AI Business Assistant</h3>
-   <p>Generate business ideas and business plans.</p>
-   <span class="tag">COMING SOON</span>
+  
+<div class="card">
+  <h3>JULIUS DIGITAL EMPIRE</h3>
+  <h4>AI BUSINESS ASSISTANT</h4>
+
+  <p>
+    Your intelligent business partner.
+    Get practical business solutions for Uganda and beyond.
+  </p>
+
+  <label for="businessTool">Choose an AI tool</label>
+  <select id="businessTool">
+    <option value="idea">Business Idea Generator</option>
+    <option value="plan">Business Plan Creator</option>
+    <option value="marketing">Marketing Strategy Generator</option>
+    <option value="budget">Startup Budget Planner</option>
+    <option value="growth">Business Growth Advisor</option>
+  </select>
+
+  <label for="businessDetails">Tell us about your business</label>
+  <textarea
+    id="businessDetails"
+    rows="6"
+    placeholder="Describe your interests, skills, location, starting capital in UGX and business goals..."
+  ></textarea>
+
+  <button id="generateBusiness" type="button">
+    Generate Business Solution
+  </button>
+
+  <div id="businessLoading" hidden>
+    Generating your business solution...
   </div>
+
+  <div id="businessResult" aria-live="polite"></div>
+</div>
+
 
   <div class="card">
    <h3>AI CV Writer</h3>
