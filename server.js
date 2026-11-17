@@ -147,18 +147,76 @@ for (let attempt = 1; attempt <= 3; attempt++) {
   }
 }
 
-    if (!response.ok) {
-      console.error("Gemini API error:", response.status);
-console.error("Gemini API details:", JSON.stringify(data));
+    
+if (!response.ok) {
+  console.error("Gemini API error:", response.status);
+  console.error("Gemini API details:", JSON.stringify(data));
+  console.log("Trying OpenAI backup...");
 
-      return res.status(
-        response.status === 429 ? 429 : 502
-      ).json({
-        error: response.status === 429
-          ? "AI usage quota reached. Please try again later."
-          : "The AI service could not complete your request."
+  const openAiKey = process.env.OPENAI_API_KEY;
+
+  if (!openAiKey) {
+    return res.status(503).json({
+      error: "OpenAI backup is not configured."
+    });
+  }
+
+  try {
+    const openAiResponse = await fetch(
+      "https://api.openai.com/v1/responses",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${openAiKey}`
+        },
+        body: JSON.stringify({
+          model: "gpt-5.4-mini",
+          input: prompt,
+          max_output_tokens: 2048,
+          store: false
+        }),
+        signal: AbortSignal.timeout(60000)
+      }
+    );
+
+    const openAiData = await openAiResponse.json();
+
+    if (!openAiResponse.ok) {
+      console.error("OpenAI API error:", openAiResponse.status);
+      console.error("OpenAI API details:", JSON.stringify(openAiData));
+
+      return res.status(502).json({
+        error: "Both AI services failed. Please try again."
       });
     }
+
+    const openAiReply = openAiData.output
+      ?.filter(item => item.type === "message")
+      .flatMap(item => item.content || [])
+      .filter(item => item.type === "output_text")
+      .map(item => item.text)
+      .join("\n")
+      .trim();
+
+    if (!openAiReply) {
+      return res.status(502).json({
+        error: "OpenAI returned an empty response."
+      });
+    }
+
+    console.log("OpenAI backup responded successfully.");
+    return res.json({ reply: openAiReply });
+
+  } catch (error) {
+    console.error("OpenAI backup error:", error.message);
+
+    return res.status(502).json({
+      error: "Both AI services are unavailable. Please try again."
+    });
+  }
+}
+
 
     const reply = data.candidates?.[0]?.content?.parts
       ?.map(part => part.text || "")
