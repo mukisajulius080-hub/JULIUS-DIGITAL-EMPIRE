@@ -171,7 +171,7 @@ if (!response.ok) {
           "Authorization": `Bearer ${openAiKey}`
         },
         body: JSON.stringify({
-          model: "gpt-5.4-mini",
+          model: "gpt-6-luna",
           input: prompt,
           max_output_tokens: 2048,
           store: false
