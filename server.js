@@ -90,17 +90,7 @@ console.log("Gemini key loaded:", Boolean(apiKey));
     }
 
     
-
-const modelUrl =
- "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent"; 
-
-let response;
-let data;
-
-for (let attempt = 1; attempt <= 3; attempt++) {
-  response = await fetch(modelUrl, {
-    method: "POST",
-    const prompt = `
+const prompt = `
 You are JULIUS DIGITAL EMPIRE AI ASSISTANT.
 
 SPECIALITY:
@@ -122,7 +112,17 @@ GENERAL INSTRUCTIONS:
 10. Provide realistic recommendations and actionable steps.
 
 Respond professionally as JULIUS DIGITAL EMPIRE.
-`;headers: {
+`;
+const modelUrl =
+ "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent"; 
+
+let response;
+let data;
+
+for (let attempt = 1; attempt <= 3; attempt++) {
+  response = await fetch(modelUrl, {
+    method: "POST",
+    headers: {
       "Content-Type": "application/json",
       "x-goog-api-key": apiKey
     },
