@@ -42,7 +42,7 @@ function allowed(ip) {
 app.post("/api/business-assistant", async (req, res) => {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
-
+console.log("Gemini key loaded:", Boolean(apiKey));
     if (!apiKey) {
       return res.status(503).json({
         error: "AI service is not configured."
