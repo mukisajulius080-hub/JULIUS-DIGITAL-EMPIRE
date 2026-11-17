@@ -193,5 +193,51 @@ footer{
  © 2026 JULIUS DIGITAL EMPIRE. All rights reserved.
 </footer>
 
+<script>
+document.getElementById("generateBusiness").addEventListener("click", async function () {
+  const tool = document.getElementById("businessTool").value;
+  const details = document.getElementById("businessDetails").value.trim();
+  const result = document.getElementById("businessResult");
+  const loading = document.getElementById("businessLoading");
+  const button = document.getElementById("generateBusiness");
+
+  if (!details) {
+    result.textContent = "Please describe your business, skills, location and starting capital.";
+    return;
+  }
+
+  loading.hidden = false;
+  result.textContent = "";
+  button.disabled = true;
+
+  try {
+    const response = await fetch("/api/business-assistant", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        tool: tool,
+        details: details
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "AI request failed.");
+    }
+
+    result.textContent = data.reply || "No answer was returned.";
+
+  } catch (error) {
+    result.textContent = "Sorry, something went wrong: " + error.message;
+  } finally {
+    loading.hidden = true;
+    button.disabled = false;
+  }
+});
+</script>
+
 </body>
 </html>
