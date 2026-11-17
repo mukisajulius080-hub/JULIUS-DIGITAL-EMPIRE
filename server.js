@@ -109,28 +109,43 @@ IMPORTANT INSTRUCTIONS:
 Respond professionally and helpfully.
 `;
 
-    const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": apiKey
-        },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{ text: prompt }]
-          }],
-          generationConfig: {
-            temperature: 0.4,
-            maxOutputTokens: 2048
-          }
-        }),
-        signal: AbortSignal.timeout(45000)
-      }
-    );
+const modelUrl =
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent";
 
-    const data = await response.json();
+let response;
+let data;
+
+for (let attempt = 1; attempt <= 3; attempt++) {
+  response = await fetch(modelUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-goog-api-key": apiKey
+    },
+    body: JSON.stringify({
+      contents: [{
+        parts: [{ text: prompt }]
+      }],
+      generationConfig: {
+        temperature: 0.4,
+        maxOutputTokens: 2048
+      }
+    }),
+    signal: AbortSignal.timeout(45000)
+  });
+
+  data = await response.json();
+
+  if (response.ok || (response.status !== 503 && response.status !== 429)) {
+    break;
+  }
+
+  if (attempt < 3) {
+    await new Promise(resolve =>
+      setTimeout(resolve, attempt * 2000)
+    );
+  }
+}
 
     if (!response.ok) {
       console.error("Gemini API error:", response.status);
