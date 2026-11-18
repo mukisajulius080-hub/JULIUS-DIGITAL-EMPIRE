@@ -25,6 +25,8 @@ app.get("/debug/ai-status", (req, res) => {
   res.json({
     server: "online",
     geminiConfigured: Boolean(process.env.GEMINI_API_KEY),
+   console.log("AI REQUEST REACHED SERVER");
+console.log("GEMINI KEY DETECTED:", Boolean(apiKey));
     geminiKeyLength: process.env.GEMINI_API_KEY
       ? process.env.GEMINI_API_KEY.length
       : 0,
