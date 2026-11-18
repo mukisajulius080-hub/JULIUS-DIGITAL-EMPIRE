@@ -11,6 +11,17 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Health check
 app.get("/health", (req, res) => {
+  // Safe AI configuration diagnostic
+app.get("/debug/ai-status", (req, res) => {
+  res.json({
+    server: "online",
+    geminiConfigured: Boolean(process.env.GEMINI_API_KEY),
+    geminiKeyLength: process.env.GEMINI_API_KEY
+      ? process.env.GEMINI_API_KEY.length
+      : 0,
+    openaiConfigured: Boolean(process.env.OPENAI_API_KEY)
+  });
+});
   res.json({
     status: "online",
     business: "JULIUS DIGITAL EMPIRE"
