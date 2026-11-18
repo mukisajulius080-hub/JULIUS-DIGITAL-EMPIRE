@@ -9,9 +9,16 @@ app.use(express.json({ limit: "15kb" }));
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// Health check
+
+ // Health check
 app.get("/health", (req, res) => {
-  // Safe AI configuration diagnostic
+  res.json({
+    status: "online",
+    business: "JULIUS DIGITAL EMPIRE"
+  });
+});
+
+// Safe AI configuration diagnostic
 app.get("/debug/ai-status", (req, res) => {
   res.json({
     server: "online",
@@ -22,6 +29,7 @@ app.get("/debug/ai-status", (req, res) => {
     openaiConfigured: Boolean(process.env.OPENAI_API_KEY)
   });
 });
+
   res.json({
     status: "online",
     business: "JULIUS DIGITAL EMPIRE"
