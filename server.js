@@ -20,19 +20,21 @@ app.get("/health", (req, res) => {
 });
 
 
+
  // Safe AI configuration diagnostic
 app.get("/debug/ai-status", (req, res) => {
+  console.log("AI REQUEST REACHED SERVER");
+
   res.json({
     server: "online",
     geminiConfigured: Boolean(process.env.GEMINI_API_KEY),
-   console.log("AI REQUEST REACHED SERVER");
-console.log("GEMINI KEY DETECTED:", Boolean(apiKey));
     geminiKeyLength: process.env.GEMINI_API_KEY
       ? process.env.GEMINI_API_KEY.length
       : 0,
     openaiConfigured: Boolean(process.env.OPENAI_API_KEY)
   });
 });
+
 
 // Basic request protection
 const requests = new Map();
