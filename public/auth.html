@@ -1,0 +1,102 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JULIUS DIGITAL EMPIRE - Account</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#091225;color:white;font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.container{background:#14213d;padding:30px;border-radius:15px;width:100%;max-width:430px}
+h1{text-align:center;color:#f5c542;font-size:25px}
+p{text-align:center;color:#ccc}
+input{width:100%;padding:14px;margin:9px 0;border:1px solid #394b68;border-radius:7px;background:#091225;color:white}
+button{width:100%;padding:14px;margin-top:12px;border:0;border-radius:7px;background:#f5c542;color:#091225;font-weight:bold;font-size:16px;cursor:pointer}
+.switch{text-align:center;margin-top:20px;color:#f5c542;cursor:pointer}
+#message{margin-top:15px;text-align:center;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>JULIUS DIGITAL EMPIRE</h1>
+<p id="heading">Create your customer account</p>
+
+<input id="name" placeholder="Full name">
+<input id="email" type="email" placeholder="Email address">
+<input id="password" type="password" placeholder="Password">
+
+<button id="action" onclick="submitForm()">CREATE ACCOUNT</button>
+<div class="switch" onclick="toggleMode()" id="switchText">
+Already have an account? Login
+</div>
+<div id="message"></div>
+</div>
+
+<script>
+const SUPABASE_URL = "https://zpqglgvxhfoyfysacclq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_cu8JnxWiXzK4D2wsFvghCw_lgsT1EzA";
+
+const client = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+let loginMode = false;
+
+function toggleMode(){
+  loginMode = !loginMode;
+  document.getElementById("name").style.display =
+    loginMode ? "none" : "block";
+  document.getElementById("heading").textContent =
+    loginMode ? "Login to your account" : "Create your customer account";
+  document.getElementById("action").textContent =
+    loginMode ? "LOGIN" : "CREATE ACCOUNT";
+  document.getElementById("switchText").textContent =
+    loginMode ? "Need an account? Register" :
+    "Already have an account? Login";
+  document.getElementById("message").textContent = "";
+}
+
+async function submitForm(){
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const message = document.getElementById("message");
+
+  message.textContent = "Please wait...";
+
+  if(!email || !password || (!loginMode && !name)){
+    message.textContent = "Please fill in all required fields.";
+    return;
+  }
+
+  let result;
+
+  if(loginMode){
+    result = await client.auth.signInWithPassword({
+      email,
+      password
+    });
+  }else{
+    result = await client.auth.signUp({
+      email,
+      password,
+      options:{
+        data:{full_name:name}
+      }
+    });
+  }
+
+  if(result.error){
+    message.textContent = result.error.message;
+  }else{
+    message.textContent = loginMode
+      ? "Login successful!"
+      : "Registration successful! Check your email to confirm your account.";
+  }
+}
+</script>
+</body>
+</html>
