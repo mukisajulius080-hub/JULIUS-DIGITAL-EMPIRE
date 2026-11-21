@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JULIUS DIGITAL EMPIRE | SMM PANEL</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5fb;color:#182440;font-family:Arial,sans-serif}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:225px;background:#101b38;color:white;padding:23px 15px}
+.brand{font-size:16px;font-weight:bold;color:#52d3ee;margin:5px 8px 35px}
+.brand small{display:block;color:#a8b8d9;font-size:10px;margin-top:5px}
+.nav{display:block;padding:14px 12px;color:#bdc9e2;text-decoration:none;border-radius:8px;margin:5px 0;font-size:13px}
+.nav.active,.nav:hover{background:#284478;color:white}
+.main{margin-left:225px;padding:25px;max-width:1500px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:25px}
+h1{font-size:23px;margin:4px 0}
+.muted{color:#8996ae;font-size:12px}
+select,input{padding:11px;border:1px solid #dce3ef;border-radius:8px;background:white;max-width:100%}
+.banner{background:linear-gradient(110deg,#182c59,#435db0);color:white;padding:28px;border-radius:15px;margin-bottom:20px}
+.banner h2{font-size:25px;margin:5px 0}
+.banner p{font-size:13px;color:#d2ddf5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
+.card{background:white;padding:19px;border-radius:12px;border:1px solid #e5eaf2;margin-bottom:16px}
+.stat{font-size:24px;font-weight:bold;margin-top:12px}
+.label{font-size:11px;color:#8290aa}
+h3{font-size:15px;margin-top:0}
+button{border:0;border-radius:8px;padding:11px 16px;background:#21b9d8;color:#082849;font-weight:bold;cursor:pointer}
+button.secondary{background:#eaf1fb;color:#31558c}
+button:disabled{opacity:.5}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.service{border:1px solid #e5eaf2;padding:14px;border-radius:10px;background:white}
+.service h4{font-size:13px;margin:5px 0}
+.service p{font-size:11px;color:#8592a9;line-height:1.5}
+.price{font-weight:bold;color:#287ca5;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:12px 8px;border-bottom:1px solid #edf0f5}
+th{color:#8995aa;font-size:10px}
+.status{color:#b17c27}
+.status.done{color:#168d69}
+.hidden{display:none}
+.notice{background:#eaf8f4;padding:12px;border-radius:8px;color:#16785d;font-size:12px;margin-bottom:15px}
+footer{font-size:10px;color:#9aa5b8;text-align:center;padding:25px}
+@media(max-width:800px){
+.sidebar{position:relative;width:100%;height:auto;padding:13px}
+.brand{margin:5px 8px 12px}
+.nav{display:inline-block;padding:9px;font-size:11px;margin:2px}
+.main{margin:0;padding:14px}
+.stats{grid-template-columns:1fr}
+.services{grid-template-columns:1fr}
+.banner{padding:20px}
+.banner h2{font-size:21px}
+header{align-items:flex-start}
+table{min-width:520px}
+.tablewrap{overflow-x:auto}
+}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+<div class="brand">JULIUS DIGITAL EMPIRE
+<small>CREATIVE & DIGITAL SERVICES</small></div>
+<a class="nav active" href="#dashboard">▦ Dashboard</a>
+<a class="nav" href="#services">▤ Services</a>
+<a class="nav" href="#neworder">＋ New Order</a>
+<a class="nav" href="#orders">◷ Orders</a>
+<a class="nav" href="#wallet">▣ Wallet</a>
+</aside>
+
+<main class="main">
+<header>
+<div>
+<div class="muted">JULIUS DIGITAL EMPIRE / PANEL</div>
+<h1>Dashboard</h1>
+</div>
+<select id="currency" onchange="render()">
+<option value="UGX">UGX</option>
+<option value="USD">USD</option>
+</select>
+</header>
+
+<section class="banner" id="dashboard">
+<div class="muted" style="color:#a6e9f5">WELCOME TO YOUR DIGITAL BUSINESS</div>
+<h2>Grow your digital presence.</h2>
+<p>Creative services, digital marketing and professional media solutions.</p>
+<button onclick="location.hash='services'">Explore Services →</button>
+</section>
+
+<div id="notice"></div>
+
+<section class="stats">
+<div class="card">
+<div class="label">DEMO WALLET BALANCE</div>
+<div class="stat" id="balance">UGX 0</div>
+</div>
+<div class="card">
+<div class="label">TOTAL ORDERS</div>
+<div class="stat" id="total">0</div>
+</div>
+<div class="card">
+<div class="label">COMPLETED ORDERS</div>
+<div class="stat" id="completed">0</div>
+</div>
+</section>
+
+<section class="card" id="services">
+<h3>Available Services</h3>
+<p class="muted">Choose a professional digital service.</p>
+<div class="services" id="serviceList"></div>
+</section>
+
+<section class="card" id="neworder">
+<h3>Create a New Order</h3>
+<p class="muted">Select a service and provide your contact details.</p>
+<form id="orderForm">
+<label class="label">Selected service</label><br>
+<select id="serviceSelect" style="width:100%;margin:8px 0" required></select>
+<label class="label">Your name</label><br>
+<input id="customer" placeholder="Enter your name" required style="width:100%;margin:8px 0">
+<label class="label">Phone number or email</label><br>
+<input id="contact" placeholder="Your contact details" required style="width:100%;margin:8px 0">
+<label class="label">Order instructions</label><br>
+<input id="details" placeholder="Describe what you need" style="width:100%;margin:8px 0">
+<button type="submit" style="width:100%;margin-top:10px">Submit Demo Order</button>
+</form>
+<p class="muted">Demo orders only. No payment is collected and no work is automatically dispatched.</p>
+</section>
+
+<section class="card" id="orders">
+<h3>Recent Orders</h3>
+<div class="tablewrap">
+<table>
+<thead><tr><th>ORDER ID</th><th>SERVICE</th><th>CUSTOMER</th><th>PRICE</th><th>STATUS</th></tr></thead>
+<tbody id="orderList"></tbody>
+</table>
+</div>
+</section>
+
+<section class="card" id="wallet">
+<h3>My Wallet</h3>
+<div class="stat" id="walletBalance">UGX 0</div>
+<p class="muted">This is a demonstration wallet, not a real payment account.</p>
+<button class="secondary" onclick="alert('MTN and Airtel payment integration will be added after backend setup.')">Payment integration – Coming soon</button>
+</section>
+
+<footer>© 2026 JULIUS DIGITAL EMPIRE. All rights reserved.</footer>
+</main>
+
+<script>
+const services=[
+{name:"Business Poster Design",ugx:30000,usd:8,description:"Professional promotional graphics."},
+{name:"YouTube Thumbnail Design",ugx:45000,usd:12,description:"Custom video thumbnail artwork."},
+{name:"Video Editing",ugx:85000,usd:23,description:"Professional promotional video editing."},
+{name:"Social Media Content Pack",ugx:120000,usd:35,description:"Branded posts and content planning."},
+{name:"Logo Design",ugx:150000,usd:40,description:"Original business logo design."},
+{name:"Social Media Account Review",ugx:60000,usd:16,description:"Professional account improvement advice."}
+];
+
+let orders=JSON.parse(localStorage.getItem("jdeOrders")||"[]");
+const $=id=>document.getElementById(id);
+function price(s){
+let c=$("currency").value;
+return c==="USD"?"$"+s.usd.toFixed(2):"UGX "+s.ugx.toLocaleString();
+}
+function render(){
+$("serviceList").innerHTML=services.map((s,i)=>`
+<div class="service">
+<h4>${s.name}</h4>
+<p>${s.description}</p>
+<div class="price">${price(s)}</div>
+<button onclick="selectService(${i})">Select service</button>
+</div>`).join("");
+
+$("serviceSelect").innerHTML=services.map((s,i)=>
+`<option value="${i}">${s.name} — ${price(s)}</option>`).join("");
+
+$("total").textContent=orders.length;
+$("completed").textContent=orders.filter(o=>o.status==="Completed").length;
+$("balance").textContent=$("currency").value==="USD"?"$0.00":"UGX 0";
+$("walletBalance").textContent=$("balance").textContent;
+
+$("orderList").innerHTML=orders.length?orders.map(o=>`
+<tr><td>${o.id}</td><td>${o.service}</td><td>${o.customer}</td>
+<td>${o.price}</td><td class="status">${o.status}</td></tr>`).join("")
+:'<tr><td colspan="5">No orders yet.</td></tr>';
+}
+function selectService(i){
+$("serviceSelect").value=i;
+location.hash="neworder";
+}
+$("orderForm").addEventListener("submit",e=>{
+e.preventDefault();
+const s=services[Number($("serviceSelect").value)];
+const c=$("currency").value;
+const order={
+id:"JDE-"+Date.now().toString().slice(-7),
+service:s.name,
+customer:$("customer").value,
+contact:$("contact").value,
+details:$("details").value,
+price:price(s),
+currency:c,
+status:"Pending"
+};
+orders.unshift(order);
+localStorage.setItem("jdeOrders",JSON.stringify(orders));
+$("notice").innerHTML='<div class="notice">Demo order created successfully. It has not been sent for fulfilment.</div>';
+$("orderForm").reset();
+render();
+location.hash="orders";
+});
+render();
+</script>
+</body>
+</html>
