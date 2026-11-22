@@ -208,10 +208,54 @@ orders.unshift(order);
 localStorage.setItem("jdeOrders",JSON.stringify(orders));
 $("notice").innerHTML='<div class="notice">Demo order created successfully. It has not been sent for fulfilment.</div>';
 $("orderForm").reset();
-render();
 location.hash="orders";
 });
 render();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "https://zpqglgvxhfoyfysacclq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_cu8JnxWiXzK4D2wsFvghCw_lgsT1EzA";
+
+const profileClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+async function loadCustomerProfile() {
+  const { data: { user }, error } =
+    await profileClient.auth.getUser();
+
+  if (error || !user) {
+    window.location.href = "auth.html";
+    return;
+  }
+
+  const { data: profile, error: profileError } =
+    await profileClient
+      .from("profiles")
+      .select("full_name")
+      .eq("id", user.id)
+      .single();
+
+  if (profileError) {
+    console.error("Profile error:", profileError.message);
+    return;
+  }
+
+  const welcome = document.createElement("div");
+  welcome.textContent =
+    "Welcome, " + (profile.full_name || user.email);
+
+  welcome.style.cssText =
+    "background:#101b38;color:white;padding:15px;margin-bottom:15px;border-radius:10px;font-weight:bold;";
+
+  document.querySelector(".main").prepend(welcome);
+}
+
+loadCustomerProfile();
 </script>
 </body>
 </html>
