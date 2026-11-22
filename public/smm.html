@@ -224,12 +224,25 @@ const profileClient = window.supabase.createClient(
   SUPABASE_KEY
 );
 
-async function loadCustomerProfile() {
-  const { data: { user }, error } =
-    await profileClient.auth.getUser();
 
-  if (error || !user) {
-    window.location.href = "auth.html";
+async function loadCustomerProfile() {
+  const welcome = document.createElement("div");
+
+  welcome.style.cssText =
+    "background:#101b38;color:white;padding:15px;margin-bottom:15px;border-radius:10px;font-weight:bold;";
+
+  welcome.textContent = "Checking your account...";
+  document.querySelector(".main").prepend(welcome);
+
+  const { data, error } = await profileClient.auth.getUser();
+
+  if (error) {
+    welcome.textContent = "Login error: " + error.message;
+    return;
+  }
+
+  if (!data.user) {
+    welcome.textContent = "No logged-in user. Please log in again.";
     return;
   }
 
@@ -237,22 +250,16 @@ async function loadCustomerProfile() {
     await profileClient
       .from("profiles")
       .select("full_name")
-      .eq("id", user.id)
+      .eq("id", data.user.id)
       .single();
 
   if (profileError) {
-    console.error("Profile error:", profileError.message);
+    welcome.textContent = "Profile error: " + profileError.message;
     return;
   }
 
-  const welcome = document.createElement("div");
   welcome.textContent =
-    "Welcome, " + (profile.full_name || user.email);
-
-  welcome.style.cssText =
-    "background:#101b38;color:white;padding:15px;margin-bottom:15px;border-radius:10px;font-weight:bold;";
-
-  document.querySelector(".main").prepend(welcome);
+    "Welcome, " + (profile.full_name || data.user.email);
 }
 
 loadCustomerProfile();
