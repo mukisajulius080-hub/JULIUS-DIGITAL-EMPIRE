@@ -90,12 +90,18 @@ async function submitForm(){
   }
 
   if(result.error){
-    message.textContent = result.error.message;
+  message.textContent = result.error.message;
+}else{
+  if(loginMode){
+    message.textContent = "Login successful! Opening your dashboard...";
+    setTimeout(() => {
+      window.location.href = "smm.html";
+    }, 1000);
   }else{
-    message.textContent = loginMode
-      ? "Login successful!"
-      : "Registration successful! Check your email to confirm your account.";
+    message.textContent =
+      "Registration successful! Check your email to confirm your account.";
   }
+}
 }
 </script>
 </body>
