@@ -103,52 +103,7 @@ async function submitForm(){
   }
 }
 }
- <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</script><script>
-const SUPABASE_URL = "https://zpqglgvxhfoyfysacclq.supabase.co";
-const SUPABASE_KEY = "sb_publishable_cu8JnxWiXzK4D2wsFvghCw_lgsT1EzA";
 
-const profileClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-async function loadCustomerProfile() {
-  const { data: { user }, error } =
-    await profileClient.auth.getUser();
-
-  if (error || !user) {
-    window.location.href = "auth.html";
-    return;
-  }
-
-  const { data: profile, error: profileError } =
-    await profileClient
-      .from("profiles")
-      .select("full_name")
-      .eq("id", user.id)
-      .single();
-
-  if (profileError) {
-    console.error("Profile loading error:", profileError.message);
-    return;
-  }
-
-  let nameBox = document.getElementById("customer-name");
-
-  if (!nameBox) {
-    nameBox = document.createElement("div");
-    nameBox.id = "customer-name";
-    nameBox.style.cssText =
-      "padding:12px;color:white;font-weight:bold;";
-    document.body.prepend(nameBox);
-  }
-
-  nameBox.textContent =
-    "Welcome, " + (profile.full_name || user.email);
-}
-
-loadCustomerProfile();
 </script>
 </body>
 </html>
