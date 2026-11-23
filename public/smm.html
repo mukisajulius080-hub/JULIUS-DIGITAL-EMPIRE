@@ -249,7 +249,7 @@ async function loadCustomerProfile() {
   const { data: profile, error: profileError } =
     await profileClient
       .from("profiles")
-      .select("full_name")
+      .select("full_name, phone_number, currency")
       .eq("id", data.user.id)
       .single();
 
@@ -259,8 +259,12 @@ async function loadCustomerProfile() {
   }
 
   welcome.textContent =
-    "Welcome, " + (profile.full_name || data.user.email);
-}
+  "Welcome, " + (profile.full_name || "Customer") +
+  "\nEmail: " + data.user.email +
+  "\nPhone: " + (profile.phone_number || "Not added yet") +
+  "\nCurrency: " + (profile.currency || "UGX");
+
+welcome.style.whiteSpace = "pre-line";
 
 loadCustomerProfile();
 </script>
