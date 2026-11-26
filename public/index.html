@@ -62,6 +62,61 @@ footer{
  padding:30px;text-align:center;
  color:#8994ab;border-top:1px solid #293149;
 }
+
+/* KJROYAL BOOKS */
+.bookstore {
+  background: #101a30;
+  padding: 50px 6%;
+  margin-top: 25px;
+}
+.bookstore-intro {
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+}
+.book-card {
+  max-width: 850px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 25px;
+  background: #171f34;
+  border: 1px solid #b99a53;
+  border-radius: 16px;
+  padding: 25px;
+}
+.book-cover {
+  min-height: 300px;
+  background: linear-gradient(145deg,#101b38,#263e64);
+  border: 2px solid #d8b66b;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+.book-cover h3 {
+  color: #f0d38a;
+  font-size: 25px;
+}
+.book-info p {
+  color: #b9c1d4;
+  line-height: 1.7;
+}
+.book-price {
+  color: #e8c879;
+  font-size: 27px;
+  font-weight: bold;
+}
+.book-note {
+  color: #f2cc78;
+  font-size: 13px;
+}
+@media(max-width:650px) {
+  .book-card { grid-template-columns:1fr; }
+}
 </style>
 </head>
 
@@ -72,8 +127,9 @@ footer{
  <nav>
   <a href="#business">Departments</a>
   <a href="#ai">AI Tools</a>
+  <a href="#books">Books</a>
   <a href="#contact">Contact</a>
- </nav>
+</nav>
 </header>
 
 <section class="hero">
@@ -197,6 +253,57 @@ footer{
   <div id="aiLoading" hidden>Generating your solution. Please wait...</div>
   <div id="aiResult" aria-live="polite"></div>
  </div>
+</section>
+
+<section class="bookstore" id="books">
+
+  <div class="bookstore-intro">
+    <div class="tag">KJROYAL GROUP DIGITAL PUBLISHING</div>
+    <h2>KJROYAL BOOKS</h2>
+    <p style="color:#b9c1d4;line-height:1.7">
+      Knowledge, education and technology at your fingertips.
+      Discover professional digital textbooks and learning materials.
+    </p>
+  </div>
+
+  <div class="book-card">
+
+    <div class="book-cover">
+      <div class="tag">KJROYAL GROUP PUBLICATION</div>
+      <h3>COMPLETE<br>COMPUTER<br>SCIENCE</h3>
+      <p>A Comprehensive Study Textbook</p>
+      <p style="color:#e8c879">PRINCE JULIUS JUNJU</p>
+    </div>
+
+    <div class="book-info">
+      <div class="tag">FEATURED BOOK · 001</div>
+      <h2 style="text-align:left">Complete Computer Science</h2>
+
+      <p>
+        A comprehensive Computer Science study textbook
+        covering foundational concepts through advanced topics.
+        Designed for learners who want to understand computers,
+        programming, networks, databases and modern technology.
+      </p>
+
+      <p><strong>Author:</strong> PRINCE JULIUS JUNJU</p>
+      <p><strong>Publisher:</strong> KJROYAL GROUP</p>
+
+      <div class="book-price">UGX 20,000</div>
+
+      <button class="btn" type="button"
+        onclick="alert('Online payment is being prepared. Please check back soon.')">
+        BUY NOW
+      </button>
+
+      <p class="book-note">
+        Secure online purchasing and private book access
+        coming soon.
+      </p>
+    </div>
+
+  </div>
+
 </section>
 
 <section class="container" id="contact">
