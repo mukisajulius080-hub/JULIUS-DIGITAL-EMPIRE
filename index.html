@@ -378,6 +378,39 @@ document.getElementById("generateAI").addEventListener("click", async function()
   </a>
 </section>
 
+<!-- JDE CUSTOMER ACCOUNT -->
+<section class="container" id="customer-account">
+  <div class="card">
+    <h2>JDE CUSTOMER ACCOUNT</h2>
+    <p style="text-align:center;color:#b9c1d4">
+      Register free and access all our digital services.
+    </p>
+
+    <label for="jdeName">Full name</label>
+    <input id="jdeName" type="text" placeholder="Enter your full name">
+
+    <label for="jdePhone">Phone number</label>
+    <input id="jdePhone" type="tel" placeholder="Example: 2567XXXXXXXX">
+
+    <label for="jdePassword">Password</label>
+    <input id="jdePassword" type="password" placeholder="At least 8 characters">
+
+    <button class="btn" type="button" onclick="jdeRegister()">
+      CREATE FREE ACCOUNT
+    </button>
+
+    <div id="jdeOtpArea" hidden>
+      <label for="jdeOtp">Enter SMS verification code</label>
+      <input id="jdeOtp" type="text" inputmode="numeric" placeholder="6-digit code">
+      <button class="btn" type="button" onclick="jdeVerifyOtp()">
+        VERIFY PHONE NUMBER
+      </button>
+    </div>
+
+    <p id="jdeAuthMessage" aria-live="polite"></p>
+  </div>
+</section>
+
 <!-- SUPABASE CONNECTION -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -391,6 +424,100 @@ const supabaseClient = window.supabase.createClient(
 );
 
 console.log("JDE CONNECT: Supabase initialized");
+async function jdeRegister() {
+  const name = document.getElementById("jdeName").value.trim();
+  let phone = document.getElementById("jdePhone").value.trim();
+  const password = document.getElementById("jdePassword").value;
+  const message = document.getElementById("jdeAuthMessage");
+
+  if (!name || !phone || !password) {
+    message.textContent = "Please fill in all fields.";
+    return;
+  }
+
+  if (phone.startsWith("0")) {
+    phone = "+256" + phone.substring(1);
+  } else if (phone.startsWith("256")) {
+    phone = "+" + phone;
+  }
+
+  if (!/^\+256[0-9]{9}$/.test(phone)) {
+    message.textContent = "Enter a valid Uganda phone number.";
+    return;
+  }
+
+  if (password.length < 8) {
+    message.textContent = "Password must be at least 8 characters.";
+    return;
+  }
+
+  message.textContent = "Registering your account...";
+
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      phone: phone,
+      password: password,
+      options: {
+        data: { full_name: name }
+      }
+    });
+
+    if (error) throw error;
+
+    document.getElementById("jdeOtpArea").hidden = false;
+    document.getElementById("jdePhone").value = phone;
+    message.textContent =
+      "Registration started. Enter the SMS verification code.";
+  } catch (error) {
+    message.textContent = "Registration error: " + error.message;
+  }
+}
+
+async function jdeVerifyOtp() {
+  const phone = document.getElementById("jdePhone").value.trim();
+  const token = document.getElementById("jdeOtp").value.trim();
+  const message = document.getElementById("jdeAuthMessage");
+
+  if (!token) {
+    message.textContent = "Enter your verification code.";
+    return;
+  }
+
+  message.textContent = "Verifying your phone number...";
+
+  try {
+    const { data, error } = await supabaseClient.auth.verifyOtp({
+      phone: phone,
+      token: token,
+      type: "sms"
+    });
+
+    if (error) throw error;
+
+    const user = data.user;
+
+    const { error: profileError } = await supabaseClient
+      .from("profiles")
+      .insert({
+        id: user.id,
+        full_name: user.user_metadata.full_name,
+        phone: user.phone
+      });
+
+    if (profileError && profileError.code !== "23505") {
+      throw profileError;
+    }
+
+    message.textContent =
+      "Your JDE account is verified successfully!";
+    document.getElementById("jdeOtpArea").hidden = true;
+
+  } catch (error) {
+    message.textContent = "Verification error: " + error.message;
+  }
+}
+
+ 
 </script>
 
 </body>
