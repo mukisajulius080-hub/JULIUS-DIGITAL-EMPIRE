@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JULIUS DIGITAL EMPIRE</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#0b1020;color:#fff;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:22px 6%;display:flex;
+ justify-content:space-between;align-items:center;
+ flex-wrap:wrap;gap:12px;
+ border-bottom:1px solid #293149;
+}
+.logo{font-size:20px;font-weight:bold;color:#d8b66b}
+nav a{color:white;text-decoration:none;margin-left:14px;font-size:13px}
+.hero{text-align:center;padding:75px 18px 55px}
+.hero h1{font-size:40px;margin:10px}
+.hero p{color:#b9c1d4;line-height:1.7}
+.gold{color:#e8c879}
+.btn{
+ display:inline-block;padding:13px 22px;
+ border-radius:9px;background:#7750c9;
+ color:white;text-decoration:none;margin:8px;
+ border:0;cursor:pointer;
+}
+.container{padding:35px 6%}
+h2{text-align:center}
+.cards{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;margin-top:25px
+}
+.card{
+ background:#171f34;border:1px solid #303b55;
+ border-radius:15px;padding:24px;
+}
+.card h3{color:#e8c879}
+.card p{color:#b9c1d4;line-height:1.6}
+.card a{color:#d9c3ff}
+.tag{color:#9e83ed;font-size:12px}
+label{display:block;margin:18px 0 8px}
+select,textarea,input{
+ width:100%;padding:13px;border-radius:8px;
+ border:1px solid #45516d;background:#0b1020;
+ color:white;font-size:15px;
+}
+textarea{resize:vertical}
+button:disabled{opacity:.5;cursor:wait}
+#aiResult{
+ white-space:pre-wrap;line-height:1.7;
+ color:#e2e8f5;margin-top:20px;
+ overflow-wrap:anywhere;
+}
+#aiLoading{color:#e8c879;margin-top:15px}
+footer{
+ padding:30px;text-align:center;
+ color:#8994ab;border-top:1px solid #293149;
+}
+
+/* KJROYAL BOOKS */
+.bookstore {
+  background: #101a30;
+  padding: 50px 6%;
+  margin-top: 25px;
+}
+.bookstore-intro {
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+}
+.book-card {
+  max-width: 850px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 25px;
+  background: #171f34;
+  border: 1px solid #b99a53;
+  border-radius: 16px;
+  padding: 25px;
+}
+.book-cover {
+  min-height: 300px;
+  background: linear-gradient(145deg,#101b38,#263e64);
+  border: 2px solid #d8b66b;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+.book-cover h3 {
+  color: #f0d38a;
+  font-size: 25px;
+}
+.book-info p {
+  color: #b9c1d4;
+  line-height: 1.7;
+}
+.book-price {
+  color: #e8c879;
+  font-size: 27px;
+  font-weight: bold;
+}
+.book-note {
+  color: #f2cc78;
+  font-size: 13px;
+}
+@media(max-width:650px) {
+  .book-card { grid-template-columns:1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">JULIUS DIGITAL EMPIRE</div>
+ <nav>
+  <a href="#business">Departments</a>
+  <a href="#ai">AI Tools</a>
+  <a href="#books">Books</a>
+  <a href="#contact">Contact</a>
+</nav>
+</header>
+
+<section class="hero">
+ <div class="tag">WELCOME TO THE DIGITAL FUTURE</div>
+ <h1>Build. Create. <span class="gold">Earn.</span></h1>
+ <p>
+ Your digital destination for online business,
+ affiliate opportunities and intelligent AI tools.
+ </p>
+ <a class="btn" href="#business">Explore Our Services</a>
+</section>
+
+<section class="container" id="business">
+ <h2>Our Business Departments</h2>
+ <div class="cards">
+
+  <div class="card">
+   <div class="tag">01 / DIGITAL APPLICATIONS</div>
+   <h3>Paid Applications</h3>
+   <p>Discover useful digital applications, premium services and online solutions.</p>
+   <a href="#contact">Explore services →</a>
+  </div>
+
+  <div class="card">
+   <div class="tag">02 / AFFILIATE HUB</div>
+   <h3>Affiliate Marketplace</h3>
+   <p>Discover products, explore offers and shop through our affiliate partners.</p>
+   <a href="#contact">Explore products →</a>
+  </div>
+
+  <div class="card">
+   <div class="tag">03 / ARTIFICIAL INTELLIGENCE</div>
+   <h3>AI Business Tools</h3>
+   <p>Use intelligent tools to write, create, plan and grow your business.</p>
+   <a href="#ai">Explore AI tools →</a>
+  </div>
+
+ </div>
+</section>
+
+<section class="container" id="ai">
+ <h2>Our AI Tools</h2>
+ <p style="text-align:center;color:#b9c1d4">
+ Choose an assistant and let AI help you get things done.
+ </p>
+
+ <div class="cards">
+
+  <div class="card">
+   <h3>AI Business Assistant</h3>
+   <p>Generate business ideas, plans, budgets, marketing strategies and growth advice.</p>
+   <button class="btn" onclick="selectTool('idea')">Use Business Assistant</button>
+  </div>
+
+  <div class="card">
+   <h3>AI CV Writer</h3>
+   <p>Prepare professional CVs, resumes and job applications.</p>
+   <button class="btn" onclick="selectTool('cv')">Create My CV</button>
+  </div>
+
+  <div class="card">
+   <h3>AI Advertising Writer</h3>
+   <p>Create promotional messages and adverts for your products and services.</p>
+   <button class="btn" onclick="selectTool('advertising')">Create Advertisement</button>
+  </div>
+
+  <div class="card">
+   <h3>AI Social Media Assistant</h3>
+   <p>Generate captions, content calendars and social media ideas.</p>
+   <button class="btn" onclick="selectTool('social')">Create Social Content</button>
+  </div>
+
+  <div class="card">
+   <h3>AI Proposal Writer</h3>
+   <p>Prepare professional project proposals, objectives and budgets.</p>
+   <button class="btn" onclick="selectTool('proposal')">Write Proposal</button>
+  </div>
+
+  <div class="card">
+   <h3>AI Music Assistant</h3>
+   <p>Develop original song ideas, lyrics and music learning resources.</p>
+   <button class="btn" onclick="selectTool('music')">Explore Music Assistant</button>
+  </div>
+
+ </div>
+
+ <div class="card" style="margin-top:30px">
+  <h3>JULIUS DIGITAL EMPIRE AI WORKSPACE</h3>
+  <p>Select your preferred AI assistant and describe what you need.</p>
+
+  <label for="aiTool">Choose an AI tool</label>
+  <select id="aiTool">
+   <optgroup label="Business Assistant">
+    <option value="idea">Business Idea Generator</option>
+    <option value="plan">Business Plan Creator</option>
+    <option value="marketing">Marketing Strategy Generator</option>
+    <option value="budget">Startup Budget Planner</option>
+    <option value="growth">Business Growth Advisor</option>
+   </optgroup>
+   <optgroup label="Other AI Tools">
+    <option value="cv">AI CV Writer</option>
+    <option value="advertising">AI Advertising Writer</option>
+    <option value="social">AI Social Media Assistant</option>
+    <option value="proposal">AI Proposal Writer</option>
+    <option value="music">AI Music Assistant</option>
+   </optgroup>
+  </select>
+
+  <label for="aiDetails">Describe what you want the AI to do</label>
+  <textarea
+   id="aiDetails"
+   rows="7"
+   maxlength="6000"
+   placeholder="Enter your information or instructions here..."
+  ></textarea>
+
+  <button class="btn" id="generateAI" type="button">
+   Generate My Solution
+  </button>
+
+  <div id="aiLoading" hidden>Generating your solution. Please wait...</div>
+  <div id="aiResult" aria-live="polite"></div>
+ </div>
+</section>
+
+<section class="bookstore" id="books">
+
+  <div class="bookstore-intro">
+    <div class="tag">KJROYAL GROUP DIGITAL PUBLISHING</div>
+    <h2>KJROYAL BOOKS</h2>
+    <p style="color:#b9c1d4;line-height:1.7">
+      Knowledge, education and technology at your fingertips.
+      Discover professional digital textbooks and learning materials.
+    </p>
+  </div>
+
+  <div class="book-card">
+
+    <div class="book-cover">
+      <div class="tag">KJROYAL GROUP PUBLICATION</div>
+      <h3>COMPLETE<br>COMPUTER<br>SCIENCE</h3>
+      <p>A Comprehensive Study Textbook</p>
+      <p style="color:#e8c879">PRINCE JULIUS JUNJU</p>
+    </div>
+
+    <div class="book-info">
+      <div class="tag">FEATURED BOOK · 001</div>
+      <h2 style="text-align:left">Complete Computer Science</h2>
+
+      <p>
+        A comprehensive Computer Science study textbook
+        covering foundational concepts through advanced topics.
+        Designed for learners who want to understand computers,
+        programming, networks, databases and modern technology.
+      </p>
+
+      <p><strong>Author:</strong> PRINCE JULIUS JUNJU</p>
+      <p><strong>Publisher:</strong> KJROYAL GROUP</p>
+
+      <div class="book-price">UGX 20,000</div>
+
+      <button class="btn" type="button"
+        onclick="alert('Online payment is being prepared. Please check back soon.')">
+        BUY NOW
+      </button>
+
+      <p class="book-note">
+        Secure online purchasing and private book access
+        coming soon.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="container" id="contact">
+ <div class="card" style="text-align:center">
+  <h2>Grow With Us</h2>
+  <p>JULIUS DIGITAL EMPIRE — Your partner in the digital world.</p>
+  <p>Uganda | MTN Mobile Money | Airtel Money</p>
+  <p>Contact details and customer registration coming soon.</p>
+ </div>
+</section>
+
+<footer>
+ © 2026 JULIUS DIGITAL EMPIRE. All rights reserved.
+</footer>
+
+<script>
+function selectTool(tool){
+ document.getElementById("aiTool").value = tool;
+ document.getElementById("ai").scrollIntoView({behavior:"smooth"});
+ document.getElementById("aiDetails").focus();
+}
+
+document.getElementById("generateAI").addEventListener("click", async function(){
+
+ const tool = document.getElementById("aiTool").value;
+ const details = document.getElementById("aiDetails").value.trim();
+ const result = document.getElementById("aiResult");
+ const loading = document.getElementById("aiLoading");
+ const button = document.getElementById("generateAI");
+
+ if(!details){
+  result.textContent = "Please describe what you need first.";
+  return;
+ }
+
+ loading.hidden = false;
+ result.textContent = "";
+ button.disabled = true;
+
+ try{
+  const response = await fetch("/api/business-assistant",{
+   method:"POST",
+   headers:{"Content-Type":"application/json"},
+   body:JSON.stringify({
+    tool:tool,
+    details:details
+   })
+  });
+
+  const data = await response.json();
+
+  if(!response.ok){
+   throw new Error(data.error || "AI request failed.");
+  }
+
+  result.textContent = data.reply || "No answer was returned.";
+
+ }catch(error){
+  result.textContent = "Sorry, something went wrong: " + error.message;
+ }finally{
+  loading.hidden = true;
+  button.disabled = false;
+ }
+});
+</script>
+
+<section style="background:#101b38;color:white;padding:30px 20px;text-align:center;margin:25px;border-radius:15px;">
+  <h2 style="color:#f5c542;">JULIUS DIGITAL SERVICES</h2>
+  <p>Explore our digital services and place your orders.</p>
+  <a href="smm.html" style="display:inline-block;background:#f5c542;color:#101b38;padding:14px 25px;text-decoration:none;border-radius:8px;font-weight:bold;margin-top:15px;">
+    EXPLORE DIGITAL SERVICES
+  </a>
+</section>
+
+</body>
+</html>
