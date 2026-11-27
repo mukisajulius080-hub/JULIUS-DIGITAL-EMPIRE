@@ -521,4 +521,87 @@ async function jdeVerifyOtp() {
 </script>
 
 </body>
+<!-- JDE CUSTOMER LOGIN -->
+<div id="jdeLoginArea" style="background:#111827;color:white;padding:25px;border-radius:12px;margin:20px;">
+  <h2>JDE CONNECT LOGIN</h2>
+  <input id="jdeLoginPhone" placeholder="Phone number" style="padding:12px;width:100%;margin:8px 0;">
+  <input id="jdeLoginPassword" type="password" placeholder="Password" style="padding:12px;width:100%;margin:8px 0;">
+  <button onclick="jdeLogin()" style="padding:14px;background:#d4af37;color:black;width:100%;font-weight:bold;">
+    LOGIN
+  </button>
+  <p id="jdeLoginMessage"></p>
+</div>
+
+<!-- CUSTOMER DASHBOARD -->
+<div id="jdeDashboard" hidden style="background:#111827;color:white;padding:25px;border-radius:12px;margin:20px;">
+  <h2>WELCOME TO JDE CONNECT</h2>
+  <h3 id="jdeCustomerName"></h3>
+  <p id="jdeCustomerPhone"></p>
+  <h3>MY WALLET</h3>
+  <h2 id="jdeWalletBalance">UGX 0</h2>
+  <h3>MY JDE SERVICES</h3>
+  <p>Explore applications, digital products and services.</p>
+  <button onclick="jdeLogout()" style="padding:12px;background:#dc2626;color:white;">
+    LOGOUT
+  </button>
+</div>
+
+<script>
+async function jdeLogin() {
+  const phone = document.getElementById("jdeLoginPhone").value.trim();
+  const password = document.getElementById("jdeLoginPassword").value;
+  const message = document.getElementById("jdeLoginMessage");
+
+  let formattedPhone = phone;
+  if (formattedPhone.startsWith("0")) {
+    formattedPhone = "+256" + formattedPhone.substring(1);
+  } else if (formattedPhone.startsWith("256")) {
+    formattedPhone = "+" + formattedPhone;
+  }
+
+  message.textContent = "Logging in...";
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    phone: formattedPhone,
+    password: password
+  });
+
+  if (error) {
+    message.textContent = error.message;
+    return;
+  }
+
+  await jdeOpenDashboard(data.user);
+}
+
+async function jdeOpenDashboard(user) {
+  const { data: profile } = await supabaseClient
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
+
+  document.getElementById("jdeLoginArea").hidden = true;
+  document.getElementById("jdeDashboard").hidden = false;
+
+  document.getElementById("jdeCustomerName").textContent =
+    profile?.full_name || user.user_metadata.full_name || "JDE Customer";
+
+  document.getElementById("jdeCustomerPhone").textContent =
+    user.phone || "";
+
+  document.getElementById("jdeWalletBalance").textContent =
+    "UGX " + Number(profile?.account_balance || 0).toLocaleString();
+}
+
+async function jdeLogout() {
+  await supabaseClient.auth.signOut();
+  document.getElementById("jdeDashboard").hidden = true;
+  document.getElementById("jdeLoginArea").hidden = false;
+}
+
+supabaseClient.auth.getSession().then(({data}) => {
+  if (data.session) jdeOpenDashboard(data.session.user);
+});
+</script>
 </html>
