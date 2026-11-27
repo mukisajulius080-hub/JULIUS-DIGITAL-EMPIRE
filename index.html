@@ -1,4 +1,4 @@
-
+y
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -377,6 +377,21 @@ document.getElementById("generateAI").addEventListener("click", async function()
     EXPLORE DIGITAL SERVICES
   </a>
 </section>
+
+<!-- SUPABASE CONNECTION -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://njbyqeenwlqnxtspijez.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_yrTNCjTnWsu1B9g5Vz0HTQ_4paJYAAH";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+console.log("JDE CONNECT: Supabase initialized");
+</script>
 
 </body>
 </html>
